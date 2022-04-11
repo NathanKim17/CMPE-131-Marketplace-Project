@@ -1,5 +1,4 @@
 # Project Name
-- Name (@username)
-- Name (@username)
-- Name (@username)
-- Name (@username)
+- Nathan Kim (@NathanKim17)
+- Bao Pham (@Cybory2424)
+- Anh Vuong (@AnhVuong146)
