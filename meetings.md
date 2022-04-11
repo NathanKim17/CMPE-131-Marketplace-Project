@@ -1,11 +1,8 @@
  ## Meetings
 
-
 ### 2022-04-10 at 20:30
-<Virtual Meeting (Discord)>
-
-### 2022-04-29 at 10:30
 - Nathan Kim, Anh Vuong, Bao Pham
+- Virtual Meeting (Discord)
 - Team updates
   - <Nathan Kim> worked on writing the use cases. Will work on adding more detail to the use cases next time.
   - <Anh Vuong> worked on functional and non-functional requirements. Will work on adding more detail to the requirments.md file next time.
