@@ -23,7 +23,7 @@
 
 ## Use Cases
 
-1. Adding a user review for a product
+### 1. Adding a user review for a product
   Pre-condition: The user must have an account and they must be logged in.
 
   Trigger: The user clicks the "Add Review" button after writing a review
@@ -37,7 +37,7 @@
 
   Primary Postconditions: The user will see a confirmation message confirming that their review has been saved.
 
-2. Change your password
+### 2. Change your password
   Pre-condition: The user must have an account, be logged in, and have an existing password. The user must also currently be on the "Account" page.
   Trigger: Select the "Enter" option.
   
@@ -50,7 +50,7 @@
     
    Primary Postconditions: The user will be redirected back to the home page where they will be greeted with a confirmation flash message confirming that their password was successfully updated.
 
-3. Add items to shopping cart
+### 3. Add items to shopping cart
   Pre-condition: The user must have an account and they must be logged in.
   Trigger: Select the "Add to Shopping Cart" button.
   
@@ -61,7 +61,7 @@
     
    Primary Postconditions: The user will see the item added to their shopping list.
    
-4. Remove items from cart
+### 4. Remove items from cart
   Pre-condition: The user must have an account and they must be logged in. The shopping cart must have at least one item in it.
   Trigger: User clicks the "Remove Item" button associated with a particular product in their shopping cart.
   
@@ -71,7 +71,7 @@
    
    Primary Postcondition: The page refreshes and the user is presented a confirmation message and the item is deleted from the shopping cart.
   
-5. Searching Items (by name or ID Number)
+### 5. Searching Items (by name or ID Number)
   Pre-condition: Website must be running on Google Chrome and the user must have access to the website
   Trigger: User presses the return key after entering the search criteria
   
@@ -81,7 +81,7 @@
     
    Primary Postcondition: The page will refresh with the results of the search (most relevant items).
   
-6. Update payment option
+### 6. Update payment option
   Pre-condition: The user must have an account and they must be logged in.
   Trigger: The user clicks the "Save" Button
   
