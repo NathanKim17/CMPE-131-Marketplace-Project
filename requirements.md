@@ -16,9 +16,9 @@
 
 ## Non-functional Requirements
 
-1. Only expected to run on Google Chrome
-2. The website will have an intuitive layout (easy for the user to maneuver)
-3. The website will be available to the user twenty-four hours a day (seven days a week)
+1. Only expected to run on Google Chrome.
+2. The website will have an intuitive layout (easy for the user to maneuver).
+3. The website will be available to the user twenty-four hours a day (seven days a week).
 4. The website will only sanction safe, reliable, and valid transactions.
 
 ## Use Cases
@@ -26,14 +26,14 @@
 ### 1. Adding a user review for a product
   Pre-condition: The user must have an account and they must be logged in.
 
-  Trigger: The user clicks the "Add Review" button after writing a review
+  Trigger: The user clicks the "Add Review" button after writing a review.
 
   Primary Sequence:
   
   1. User is viewing a particular product and clicks the "Add Review" button
   2. The user writes a short review about the product.
   3. The user selects how many stars (out of five) they would rate the product.
-  4. The user clicks the "Add Review" button
+  4. The user clicks the "Add Review" button.
 
   Primary Postconditions: The user will see a confirmation message confirming that their review has been saved.
 
@@ -46,7 +46,7 @@
     2. Select the "Change Password" option.
     3. User is presented an input box where they will enter their old password.
     4. If the old password matches, the page will direct the user to an input box where they will enter their new password.
-    5. User selcts the "Enter" button to confirm.
+    5. User selects the "Enter" button to confirm.
     
    Primary Postconditions: The user will be redirected back to the home page where they will be greeted with a confirmation flash message confirming that their password was successfully updated.
 
@@ -72,8 +72,8 @@
    Primary Postcondition: The page refreshes and the user is presented a confirmation message and the item is deleted from the shopping cart.
   
 ### 5. Searching Items (by name or ID Number)
-  Pre-condition: Website must be running on Google Chrome and the user must have access to the website
-  Trigger: User presses the return key after entering the search criteria
+  Pre-condition: Website must be running on Google Chrome and the user must have access to the website.
+  Trigger: User presses the return key after entering the search criteria.
   
   Primary Sequence:
     1. The user navigates to the "Browse Items" page.
