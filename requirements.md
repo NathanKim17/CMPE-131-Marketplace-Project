@@ -2,7 +2,7 @@
 
 1. User Login
 2. User Logout
-3. Create new account
+3. Create new user account
 4. Delete account
 5. Change your password
 6. Hide password when the user is typing it in
