@@ -1,7 +1,7 @@
 ## Functional Requirements
 
-1. Login
-2. Logout
+1. User Login
+2. User Logout
 3. Create new account
 4. Delete account
 5. Change your password
