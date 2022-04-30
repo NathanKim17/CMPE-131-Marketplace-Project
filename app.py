@@ -55,6 +55,24 @@ def logout():
     session['logged_in'] = False
     return redirect(url_for('home'))
 
+@app.route("/accountdetails", methods=['GET', 'POST'])
+def accountdetails():
+     return render_template('accountdetails.html')
+ 
+@app.route("/changepassword", methods=['GET', 'POST'])
+def changepassword():
+    if request.method =='POST':
+        new_password = User(
+            newpassword = request.form['newpassword'])
+        db.session.add(new_password)
+        db.session.commit()
+        return redirect(url_for('accountdetails'))
+    return render_template('changepassword.html')
+
+@app.route("/updatepayment", methods=['GET', 'POST'])
+def updatepayment():
+    return render_template('updatepayment.html')
+
 if __name__ == '__main__':
     app.debug = True
     db.create_all()
