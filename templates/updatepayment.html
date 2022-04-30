@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+{% if session['logged_in'] %}
+
+<h1> Update Payment </h1>
+<form action="/login" method="POST">
+    <div style = "position:relative; right:52px">
+        <div style = "position:relative; right:10px"> 
+            <body> Full Name On Card </body> </div>
+    <input type="full name" name="Full name on card" placeholder="Full Name">
+    </div><br>
+
+    <div style = "position:relative; right:52px">
+        <div style = "position:relative; right:28px"> 
+            <body> Card Number </body></div>
+    <input type="cardnumber" name="cardnumber" placeholder="1234 1234 1234 1234"><br>
+    </div><br>
+
+    <div style = "position:relative; right:52px;">
+        <div style = "position:relative; right:23px"> 
+            <body> Expiration Date </body><br> </div>
+        <input type="expirationdate" name="expirationdate" placeholder="MM/YY"><br>
+        </div><br>
+
+    <div style = "position:relative; right:52px;">
+        <div style = "position:relative; right:55px"> 
+            <body> CVV </body><br> </div>
+        <input type="CVV" name="CVV" placeholder="123"><br>
+        </div><br>
+    <input type="submit" value="update">
+    
+  </form>
+
+
+
+{% else %}
+{% endif %}
+{% endblock %}
