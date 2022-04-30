@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+{% if session['logged_in'] %}
+
+<div style = "position:relative; border:solid;
+    font-size:40px; background-color:gray">
+    <a href = "/changepassword" >Change Password</a> <br>
+    <a href = "/updatepayment" >Update Payment</a>
+ </div>
+
+{% else %}
+{% endif %}
+{% endblock %}
