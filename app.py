@@ -56,6 +56,14 @@ def register():
         return render_template('login.html')
     return render_template('register.html')
 
+@app.route('/delete', methods=['GET', 'POST'])
+def delete():
+    session['logged_in'] = True
+    User.query.filter_by(id=1).delete()
+    db.session.commit()
+    session['logged_in'] = False
+    return render_template('index.html')
+
 @app.route("/logout")
 def logout():
     session['logged_in'] = False
