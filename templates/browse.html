@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<head>
+    <h1 style="text-align:center;">Browse</h1>
+</head>
+
+<body>
+    {% if list %}
+        <ol>
+            {% for item in list %}
+                <!-- <a href="/itemInfo"> -->
+                    <li style="text-align:left;"> {{item.name}} : {{item.price}}</li>
+                <!-- </a> -->
+            {% endfor %}
+        </ol>  
+    {% endif %}
+</body>
+{% endblock %}

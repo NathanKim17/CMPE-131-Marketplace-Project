@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<head>
+    <h1 style="text-align:center;">Item Information: {{item.name}}</h1>
+</head>
+
+<body>
+    <h2>Details:</h2>
+    <ul>
+        <li>ID Number: {{item.idNumber}}</li>
+        <li>Price: {{item.price}}</li>
+    </ul>
+</body>
+
+{% endblock %}

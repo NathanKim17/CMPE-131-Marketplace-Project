@@ -5,7 +5,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
 
-
+#User Class
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), unique=True)
@@ -14,6 +14,12 @@ class User(db.Model):
     def __init__(self, username, password):
         self.username = username
         self.password = password
+#Item Class
+class Item():
+    def __init__(self, name, idNumber, price):
+        self.name = name
+        self.idNumber = idNumber
+        self.price = price
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -73,6 +79,19 @@ def changepassword():
 def updatepayment():
     return render_template('updatepayment.html')
 
+@app.route("/browse")
+def browse() :
+    #itemOne = Item("Cool Aid", "011223", 1.23)
+    itemsList = []
+    itemsList.append(Item("Cool Aid", "011223", 1.23))
+    itemsList.append(Item("Coke", "32145", 10.99))
+    itemsList.append(Item("Ice Cream", "8787", 0.50))
+    itemsList.append(Item("Soccer Ball", "7777", 50.00))
+    return render_template('browse.html', list = itemsList)
+
+#@app.route("/itemInfo")
+#def itemInfo :
+    #return render_template('intemInfo.html', item)
 if __name__ == '__main__':
     app.debug = True
     db.create_all()
