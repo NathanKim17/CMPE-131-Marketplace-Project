@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<head>
+    <h1 style="text-align:center;">Browse</h1>
+</head>
+
+<body>
+    {% if list %}
+        <ol>
+            {% for item in list %}
+                <li style="text-align:left;" onclick="myFunction()"> {{item.name}} : {{item.price}}</li>
+            {% endfor %}
+        </ol>  
+    {% endif %}
+
+    <script>
+        function myFunction() {
+          itemInfo(item);
+        }
+    </script>
+</body>
+{% endblock %}
