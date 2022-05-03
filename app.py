@@ -16,12 +16,17 @@ class User(db.Model):
         self.password = password
 #Item Class
 class Item():
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
+    idNumber = db.Column(db.String(80), unique=True)
+    price = db.Column(db.Float(80))
+    
     def __init__(self, name, idNumber, price):
         self.name = name
         self.idNumber = idNumber
         self.price = price
 
-
+new_Item = Item("Coke", "1234567890", 1.75)
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if not session.get('logged_in'):
