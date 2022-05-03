@@ -25,7 +25,7 @@ class User_new(db.Model):
         self.newpassword = newpassword
         
 #Item Class
-class Item():
+class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
     idNumber = db.Column(db.String(80), unique=True)
