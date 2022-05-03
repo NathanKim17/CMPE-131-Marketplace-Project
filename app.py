@@ -14,6 +14,16 @@ class User(db.Model):
     def __init__(self, username, password):
         self.username = username
         self.password = password
+        
+class User_new(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    User.password = db.Column(db.String(80))
+    newpassword = db.Column(db.String(80), unique=True)
+
+    def __init__(self, password, newpassword):
+        self.password = password
+        self.newpassword = newpassword
+        
 #Item Class
 class Item():
     id = db.Column(db.Integer, primary_key=True)
@@ -81,11 +91,13 @@ def accountdetails():
 @app.route("/changepassword", methods=['GET', 'POST'])
 def changepassword():
     if request.method =='POST':
-        new_password = User(
+        new_password = User_new(
+            password = User.password,
             newpassword = request.form['newpassword'])
+        db.session.delete(User.password)
         db.session.add(new_password)
         db.session.commit()
-        return redirect(url_for('accountdetails'))
+        return render_template('index.html')
     return render_template('changepassword.html')
 
 @app.route("/updatepayment", methods=['GET', 'POST'])
