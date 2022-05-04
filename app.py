@@ -15,28 +15,46 @@ class User(db.Model):
         self.username = username
         self.password = password
         
-class User_new(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    User.password = db.Column(db.String(80))
-    newpassword = db.Column(db.String(80), unique=True)
+# class User_new(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     User.password = db.Column(db.String(80))
+#     newpassword = db.Column(db.String(80), unique=True)
 
-    def __init__(self, password, newpassword):
-        self.password = password
-        self.newpassword = newpassword
-        
+#     def __init__(self, password, newpassword):
+#         self.password = password
+#         self.newpassword = newpassword
+
 #Item Class
-class Item(db.Model):
+#class Item(db.Model):
+    #id = db.Column(db.Integer, primary_key=True)
+    #name = db.Column(db.String(80))
+    #idNumber = db.Column(db.String(80), unique=True)
+    #price = db.Column(db.Float(80))
+    
+    # def __init__(self, name, idNumber, price):
+    #     self.name = name
+    #     self.idNumber = idNumber
+    #     self.price = price
+
+    #def __repr__(self):
+        #return f'<Item: {self.name}'
+
+class Item2(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    idNumber = db.Column(db.String(80), unique=True)
     price = db.Column(db.Float(80))
-    
-    def __init__(self, name, idNumber, price):
+
+    def init(self, name, price):
         self.name = name
-        self.idNumber = idNumber
         self.price = price
 
-new_Item = Item("Coke", "1234567890", 1.75)
+
+newItem = Item2(name = 'Coke', price = 1.50)
+db.session.add(newItem)
+db.session.commit()
+
+
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if not session.get('logged_in'):
@@ -108,10 +126,10 @@ def updatepayment():
 def browse() :
     #itemOne = Item("Cool Aid", "011223", 1.23)
     itemsList = []
-    itemsList.append(Item("Cool Aid", "011223", 1.23))
-    itemsList.append(Item("Coke", "32145", 10.99))
-    itemsList.append(Item("Ice Cream", "8787", 0.50))
-    itemsList.append(Item("Soccer Ball", "7777", 50.00))
+    #itemsList.append(Item("Cool Aid", "011223", 1.23))
+    # itemsList.append(Item("Coke", "32145", 10.99))
+    # itemsList.append(Item("Ice Cream", "8787", 0.50))
+    # itemsList.append(Item("Soccer Ball", "7777", 50.00))
     return render_template('browse.html', list = itemsList)
 
 #@app.route("/itemInfo")
