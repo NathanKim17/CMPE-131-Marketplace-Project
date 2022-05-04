@@ -15,14 +15,28 @@ class User(db.Model):
         self.username = username
         self.password = password
         
-# class User_new(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     User.password = db.Column(db.String(80))
-#     newpassword = db.Column(db.String(80), unique=True)
+class User_new(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    password = db.Column(db.String(80), unique=True)
+    newpassword = db.Column(db.String(80))
 
-#     def __init__(self, password, newpassword):
-#         self.password = password
-#         self.newpassword = newpassword
+    def __init__(self, password, newpassword):
+        self.password = password
+        self.newpassword = newpassword
+        
+#card update payment class
+class update_payment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
+    cardnumber = db.Column(db.String(80), unique = True)
+    expire = db.Column(db.String(80), unique = True)
+    cvv = db.Column(db.String(80), unique = True)
+
+    def __init__(self, name, cardnumber, expire, cvv):
+        self.name = name
+        self.cardnumber = cardnumber
+        self.expire = expire
+        self.cvv = cvv 
 
 #Item Class
 #class Item(db.Model):
@@ -108,18 +122,28 @@ def accountdetails():
  
 @app.route("/changepassword", methods=['GET', 'POST'])
 def changepassword():
-    if request.method =='POST':
+    if request.method == 'POST':
         new_password = User_new(
-            password = User.password,
-            newpassword = request.form['newpassword'])
-        db.session.delete(User.password)
+            password=request.form['password'],
+            newpassword=request.form['newpassword'])
         db.session.add(new_password)
         db.session.commit()
+        flash('Your password has been updated!')
         return render_template('index.html')
     return render_template('changepassword.html')
 
 @app.route("/updatepayment", methods=['GET', 'POST'])
 def updatepayment():
+    if request.method == 'POST':
+        updatepayment = update_payment(
+            name = request.form['name'],
+            cardnumber = request.form['cardnumber'],
+            expire = request.form['expire'],
+            cvv = request.form['cvv'])
+        db.session.add(updatepayment)
+        db.session.commit()
+        flash('Your payment has been updated!')
+        return render_template('index.html')
     return render_template('updatepayment.html')
 
 @app.route("/browse")
