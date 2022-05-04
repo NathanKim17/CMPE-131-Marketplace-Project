@@ -15,20 +15,20 @@ class User(db.Model):
         self.username = username
         self.password = password
         
-class User_new(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    User.password = db.Column(db.String(80))
-    newpassword = db.Column(db.String(80), unique=True)
-
-    def __init__(self, password, newpassword):
-        self.password = password
-        self.newpassword = newpassword
+# class User_new(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     User.password = db.Column(db.String(80))
+#     newpassword = db.Column(db.String(80), unique=True)
+#
+#     def __init__(self, password, newpassword):
+#         self.password = password
+#         self.newpassword = newpassword
         
 #Item Class
-class Item():
+class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
-    idNumber = db.Column(db.String(80), unique=True)
+    idNumber = db.Column(db.String(80))
     price = db.Column(db.Float(80))
     
     def __init__(self, name, idNumber, price):
@@ -36,7 +36,21 @@ class Item():
         self.idNumber = idNumber
         self.price = price
 
-new_Item = Item("Coke", "1234567890", 1.75)
+
+class Item2(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
+    price = db.Column(db.Float(80))
+
+    def __init__(self, name, price):
+        self.name = name
+        self.price = price
+
+newItem = Item2(name = 'Coke', price = 1.50)
+db.session.add(newItem)
+db.session.commit()
+
+# new_Item = Item("Coke", "1234567890", 1.75)
 @app.route('/', methods=['GET', 'POST'])
 def home():
     if not session.get('logged_in'):
@@ -117,6 +131,8 @@ def browse() :
 #@app.route("/itemInfo")
 #def itemInfo :
     #return render_template('intemInfo.html', item)
+
+
 if __name__ == '__main__':
     app.debug = True
     db.create_all()
