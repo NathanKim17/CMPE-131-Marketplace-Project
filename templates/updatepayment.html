@@ -3,29 +3,31 @@
 {% if session['logged_in'] %}
 
 <h1> Update Payment </h1>
-<form action="/login" method="POST">
+<form action="/updatepayment" method="POST">
     <div style = "position:relative; right:52px">
         <div style = "position:relative; right:10px"> 
             <body> Full Name On Card </body> </div>
-    <input type="full name" name="Full name on card" placeholder="Full Name">
+    <input type="name" name="name" placeholder="Full Name">
     </div><br>
 
     <div style = "position:relative; right:52px">
         <div style = "position:relative; right:28px"> 
             <body> Card Number </body></div>
-    <input type="cardnumber" name="cardnumber" placeholder="1234 1234 1234 1234"><br>
+    <input type="cardnumber" name="cardnumber" 
+        placeholder="1234 1234 1234 1234" maxlength ="16"><br>
     </div><br>
 
     <div style = "position:relative; right:52px;">
         <div style = "position:relative; right:23px"> 
             <body> Expiration Date </body><br> </div>
-        <input type="expirationdate" name="expirationdate" placeholder="MM/YY"><br>
+        <input type="expire" name="expire" placeholder="MM/YY"
+        maxlength = "4"><br>
         </div><br>
 
     <div style = "position:relative; right:52px;">
         <div style = "position:relative; right:55px"> 
             <body> CVV </body><br> </div>
-        <input type="CVV" name="CVV" placeholder="123"><br>
+        <input type="cvv" name="cvv" placeholder="123" maxlength ="3"><br>
         </div><br>
     <input type="submit" value="update">
     
