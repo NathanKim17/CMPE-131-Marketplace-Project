@@ -25,19 +25,19 @@ class User(db.Model):
 #         self.newpassword = newpassword
 
 #Item Class
-#class Item(db.Model):
-    #id = db.Column(db.Integer, primary_key=True)
-    #name = db.Column(db.String(80))
-    #idNumber = db.Column(db.String(80), unique=True)
-    #price = db.Column(db.Float(80))
+class Item(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
+    idNumber = db.Column(db.String(80), unique=True)
+    price = db.Column(db.Float(80))
     
-    # def __init__(self, name, idNumber, price):
-    #     self.name = name
-    #     self.idNumber = idNumber
-    #     self.price = price
+    def __init__(self, name, idNumber, price):
+        self.name = name
+        self.idNumber = idNumber
+        self.price = price
 
-    #def __repr__(self):
-        #return f'<Item: {self.name}'
+    def __repr__(self):
+        return f'<Item: {self.name}'
 
 class Item2(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -49,7 +49,7 @@ class Item2(db.Model):
         self.price = price
 
 
-newItem = Item2(name = 'Coke', price = 1.50)
+newItem = Item2(name='Coke', price = 1.50)
 db.session.add(newItem)
 db.session.commit()
 
@@ -106,17 +106,17 @@ def logout():
 def accountdetails():
      return render_template('accountdetails.html')
  
-@app.route("/changepassword", methods=['GET', 'POST'])
-def changepassword():
-    if request.method =='POST':
-        new_password = User_new(
-            password = User.password,
-            newpassword = request.form['newpassword'])
-        db.session.delete(User.password)
-        db.session.add(new_password)
-        db.session.commit()
-        return render_template('index.html')
-    return render_template('changepassword.html')
+# @app.route("/changepassword", methods=['GET', 'POST'])
+# def changepassword():
+#     if request.method =='POST':
+#         new_password = User_new(
+#             password = User.password,
+#             newpassword = request.form['newpassword'])
+#         db.session.delete(User.password)
+#         db.session.add(new_password)
+#         db.session.commit()
+#         return render_template('index.html')
+#     return render_template('changepassword.html')
 
 @app.route("/updatepayment", methods=['GET', 'POST'])
 def updatepayment():
@@ -124,17 +124,19 @@ def updatepayment():
 
 @app.route("/browse")
 def browse() :
-    #itemOne = Item("Cool Aid", "011223", 1.23)
+    # itemOne = Item("Cool Aid", "011223", 1.23)
     itemsList = []
-    #itemsList.append(Item("Cool Aid", "011223", 1.23))
-    # itemsList.append(Item("Coke", "32145", 10.99))
-    # itemsList.append(Item("Ice Cream", "8787", 0.50))
-    # itemsList.append(Item("Soccer Ball", "7777", 50.00))
+    itemsList.append(Item("Cool Aid", "011223", 1.23))
+    itemsList.append(Item("Coke", "32145", 10.99))
+    itemsList.append(Item("Ice Cream", "8787", 0.50))
+    itemsList.append(Item("Soccer Ball", "7777", 50.00))
     return render_template('browse.html', list = itemsList)
 
-#@app.route("/itemInfo")
-#def itemInfo :
-    #return render_template('intemInfo.html', item)
+@app.route("/itemInfo")
+def itemInfo() :
+    return render_template('itemInfo.html')
+
+
 if __name__ == '__main__':
     app.debug = True
     db.create_all()
