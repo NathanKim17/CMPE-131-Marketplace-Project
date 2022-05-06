@@ -53,7 +53,7 @@ class update_payment(db.Model):
     #def __repr__(self):
         #return f'<Item: {self.name}'
 
-class Item2(db.Model):
+class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
     price = db.Column(db.Float(80))
@@ -69,19 +69,19 @@ class Item2(db.Model):
 
 
 itemsList = []
-itemsList.append(Item2(name = 'Coke', price = 1.50))
+itemsList.append(Item(name = 'Coke', price = 1.50))
 db.session.add(itemsList[0])
 db.session.commit()
 
-itemsList.append(Item2(name = 'Yoyo', price = 1.75))
+itemsList.append(Item(name = 'Yoyo', price = 1.75))
 db.session.add(itemsList[1])
 db.session.commit()
 
-itemsList.append(Item2(name = "Jar", price = 0.50))
+itemsList.append(Item(name = "Jar", price = 0.50))
 db.session.add(itemsList[2])
 db.session.commit()
 
-itemsList.append(Item2(name = "Soccer Ball", price = 50.00))
+itemsList.append(Item(name = "Soccer Ball", price = 50.00))
 db.session.add(itemsList[3])
 db.session.commit()
 
@@ -183,9 +183,9 @@ def browse() :
 
 @app.route('/iI/<int:id>', methods=['GET', 'POST'])
 def itemPage(id):
-    itemId = Item2.query.get(id)
-    iName = Item2.query.get(id).name
-    iPrice = Item2.query.get(id).price
+    itemId = Item.query.get(id)
+    iName = Item.query.get(id).name
+    iPrice = Item.query.get(id).price
 
     print(itemId)
 
