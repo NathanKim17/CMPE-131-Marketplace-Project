@@ -14,7 +14,24 @@
 - Nathan Kim, Anh Vuong, Bao Pham, Adam Eccleston
 - In person meeting (Engineering building)
 - Team updates 
-  - <Nathan Kim> Worked on the code for adding items to       shopping cart, remove items from the shopping cart.
+  - <Nathan Kim> Worked on the code for adding items to shopping cart, remove items from the shopping cart.
   - <Anh Vuong> Worked on account details which includes the code for changing the user password using the database and updating card payment. 
   - <Bao Pham> Finished the code for log in, log out, register account, and delete account using database.
   - <Adam Eccleston> Add HTML code into the templates folder that provides the users to add a review and provided a coupon code.
+
+### 2022-05-03 at 16:30
+- Nathan Kim, Anh Vuong, Bao Pham, Adam Eccleston
+- Virtual meeting (Discord)
+- Team updates
+  - <Nathan Kim> Continue to work on the funcitonal requirements of browsing item, adding items to shopping cart, and removing items
+  - <Anh Vuong> Continue to work on the functional requirement for changing password for the user and updating the user's payment into a  database
+  - <Bao Pham> Added CSS pictures and changed the website base template. 
+  - <Adam Eccleston> Continue to work on the fucntional requirement for adding a user review after browsing and allowing the user to enter a coupon code. 
+
+### 2022-05-05 at 16:30
+- Nathan Kim, Anh Vuong, Bao Pham
+- Virutal Meeting for Anh and Bao (Discord). In person meeting for Bao and Nathan (in class)
+- Team udpates 
+  - <Nathan Kim> Continue to work on the funcitonal requirements of browsing item, adding items to shopping cart, and removing items
+  - <Anh Vuong> Continue to work on the functional requirement for changing password for the user and finished updating the user's payment into a database
+  - <Bao Pham> Helped Nathan with his functional requirement for browsing items. 
