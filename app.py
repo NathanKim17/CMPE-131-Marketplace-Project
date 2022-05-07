@@ -105,7 +105,14 @@ def login():
                 session['logged_in'] = True
                 return redirect(url_for('home'))
             else:
-                return 'Incorrect Login'
+                return '''
+            <html>
+            <head> Incorrect Log In </head>
+            <a href="/login">
+            <button>Go back</button>
+            </a>    
+            </html
+            '''
         except:
             return "Not Logged In"
 
