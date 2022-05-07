@@ -10,6 +10,23 @@
     <ul>
         <li>Price: {{itemPrice}}</li>
     </ul>
+        <!---
+    <a href="/iI/{{IdNum}}/addreview">
+        <button> Add a Review</button>
+     </a>
+     --->
+    <!--- <form action="/iI/{{IdNum}}" method="POST">--->
+        <input type="coupon" name="coupon" placeholder="Coupon Code">
+        <input type="submit" value="Enter">
+     <!--- </form>--->
+
+
+    <!--- <form action="/iI/{{IdNum}}" method="POST">--->
+        <ul></ul>
+        <textarea type="review"  name="review"  placeholder="Type a review"></textarea>
+        <input type="submit" value="Add">
+    <!---  </form>--->
+    
 </body>
 
 {% endblock %}
