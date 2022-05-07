@@ -62,7 +62,16 @@ class Item(db.Model):
         self.name = name
         self.price = price
 
+# class Reviews(db.Model):
+#     id = db.Column(db.Integer, db.ForeignKey('item.id'))
+#     review = db.Column(db.Text())
 
+#     def __init__(self, review):
+#         self.review = review
+        
+
+        
+        
 # newItem = Item2(name = 'Coke', price = 1.50)
 # db.session.add(newItem)
 # db.session.commit()
@@ -196,10 +205,33 @@ def itemPage(id):
 
     print(itemId)
 
-    return render_template('itemInfo.html', itemName = iName, itemPrice = iPrice)
+    couponcode = "Rojas"
+
+    # if request.method == 'POST':
+    #     usercoupon=request.form['coupon'],
+    #     if usercoupon == couponcode:
+    #         raise forms.ValidationError('Your coupon code has been accepted!')
+    #     else:
+    #         flash('Your coupon code is invalid!')
+
+    # if request.method == 'POST':
+    #     new_review = Reviews(
+    #         reviewslist=request.form['review'])
+    #     db.session.add(new_review)
+    #     db.session.commit()
+    
+    return render_template('itemInfo.html', itemName = iName, itemPrice = iPrice, IdNum = id)
 #@app.route("/itemInfo")
 #def itemInfo :
     #return render_template('intemInfo.html', item)
+    
+@app.route('/iI/<int:id>/addreview', methods=['GET', 'POST'])
+def addreview(id):
+
+
+    return render_template('addreview.html')
+    
+    
 if __name__ == '__main__':
     app.debug = True
     db.create_all()
