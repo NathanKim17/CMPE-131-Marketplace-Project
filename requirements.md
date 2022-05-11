@@ -5,14 +5,13 @@
 3. Create new user account
 4. Delete account
 5. Change your password
-6. Hide password when the user is typing it in
-7. Add items to shopping cart
-8. Remove Items from cart
-9. Enter coupon code
-10. Searching Items (by name or ID Number)
-11. Adding a user review for a product
-12. Update payment option
-13. Password Recovery (via email verification)
+6. Add items to shopping cart
+7. Remove Items from cart
+8. Enter coupon code
+9. Searching Items (by name or ID Number)
+10. Adding a user review for a product
+11. Update payment option
+12. Password Recovery (via email verification)
 
 ## Non-functional Requirements
 
@@ -39,6 +38,7 @@
 
 ### 2. Change your password
   Pre-condition: The user must have an account, be logged in, and have an existing password. The user must also currently be on the "Account" page.
+  
   Trigger: Select the "Enter" option.
   
   Primary Sequence:
@@ -56,6 +56,7 @@
 
 ### 3. Add items to shopping cart
   Pre-condition: The user must have an account and they must be logged in.
+  
   Trigger: Select the "Add to Shopping Cart" button.
   
   Primary Sequence:
@@ -67,6 +68,7 @@
    
 ### 4. Remove items from cart
   Pre-condition: The user must have an account and they must be logged in. The shopping cart must have at least one item in it.
+  
   Trigger: User clicks the "Remove Item" button associated with a particular product in their shopping cart.
   
   Primary Sequence:
@@ -77,6 +79,7 @@
   
 ### 5. Searching Items (by name or ID Number)
   Pre-condition: Website must be running on Google Chrome and the user must have access to the website.
+  
   Trigger: User presses the return key after entering the search criteria.
   
   Primary Sequence:
@@ -87,6 +90,7 @@
   
 ### 6. Update payment option
   Pre-condition: The user must have an account and they must be logged in.
+  
   Trigger: The user clicks the "Save" Button
   
   Primary Sequence:
