@@ -62,12 +62,15 @@ class Item(db.Model):
         self.name = name
         self.price = price
 
-# class Reviews(db.Model):
-#     id = db.Column(db.Integer, db.ForeignKey('item.id'))
-#     review = db.Column(db.Text())
+class reviews_table_test(db.Model):
+    review_number = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), db.ForeignKey('user.username'))
+    itemID = db.Column(db.Integer)
+    review = db.Column(db.Text)
 
-#     def __init__(self, review):
-#         self.review = review
+    def init(self, username, review):
+        self.username = username
+        self.review = review
         
 
         
@@ -94,6 +97,7 @@ itemsList.append(Item(name = "Soccer Ball", price = 50.00))
 db.session.add(itemsList[3])
 db.session.commit()
 
+reviews_list = []
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -111,6 +115,7 @@ def login():
         try:
             data = User.query.filter_by(username=username, password=password).first()
             if data is not None:
+                session["username"] = username
                 session['logged_in'] = True
                 return redirect(url_for('home'))
             else:
@@ -207,29 +212,73 @@ def itemPage(id):
 
     couponcode = "Rojas"
 
-    # if request.method == 'POST':
-    #     usercoupon=request.form['coupon'],
-    #     if usercoupon == couponcode:
-    #         raise forms.ValidationError('Your coupon code has been accepted!')
-    #     else:
-    #         flash('Your coupon code is invalid!')
-
-    # if request.method == 'POST':
-    #     new_review = Reviews(
-    #         reviewslist=request.form['review'])
-    #     db.session.add(new_review)
-    #     db.session.commit()
+    tempUser = session['username']
     
-    return render_template('itemInfo.html', itemName = iName, itemPrice = iPrice, IdNum = id)
+    print(itemId)
+    usercoupon = "Test"
+    coupons = False
+    couponcode = "Rojas"
+    
+    if request.method == 'POST':
+        new_review = reviews_table_test(
+            username = tempUser,
+            itemID = id,
+            review = request.form['review'])
+        reviews_list.append(new_review)   
+        db.session.add(new_review)
+        db.session.commit()
+    
+        return render_template('itemInfo.html', itemName = iName, itemPrice = format(iPrice, '.2f'), IdNum = id, review_list = reviews_list, coupon = coupons, ReducedPrice = format(ReducedPrice, '.2f'))
+
+
+
+    return render_template('itemInfo.html', itemName = iName, itemPrice = format(iPrice, '.2f'), IdNum = id, reviews_list = reviews_list, coupon = coupons, ReducedPrice = format(ReducedPrice, '.2f'))
 #@app.route("/itemInfo")
 #def itemInfo :
     #return render_template('intemInfo.html', item)
     
 @app.route('/iI/<int:id>/addreview', methods=['GET', 'POST'])
 def addreview(id):
+    itemIds = Item.query.get(id)
+    # if session['logged_in'] == True:
+    tempUser = session['username']
+    # new_review = reviews_table_test
+
+    if request.method == 'POST':
+        new_review = reviews_table_test(
+            username = tempUser,
+            itemID = id,
+            review = request.form['review'])
+        reviews_list.append(new_review)   
+        db.session.add(new_review)
+        db.session.commit()
 
 
-    return render_template('addreview.html')
+        return render_template('addreview.html', IdNum = id, review_list = reviews_list, list = itemsList)
+
+    return render_template('addreview.html', IdNum = id, review_list = reviews_list, list = itemsList)
+
+
+@app.route('/iI/<int:id>/coupon', methods=['GET', 'POST'])
+def addcoupon(id):
+
+    itemId = Item.query.get(id)
+    iName = Item.query.get(id).name
+    iPrice = Item.query.get(id).price
+    # uName = User.query.get(username)
+    ReducedPrice = iPrice * .1
+
+    usercoupon = "Test"
+    coupons = False
+    couponcode = "Rojas"
+
+    if request.method == 'POST':
+        usercoupon = request.form['coupon'],
+        if usercoupon[0] == couponcode:
+            coupons = True
+        
+        print(usercoupon)
+    return render_template('coupon.html', itemName = iName, itemPrice = format(iPrice, '.2f'), IdNum = id, review_list = reviews_list, coupon = coupons, ReducedPrice = format(ReducedPrice, '.2f'))
     
     
 if __name__ == '__main__':
