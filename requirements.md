@@ -42,11 +42,11 @@
   Trigger: Select the "Enter" option.
   
   Primary Sequence:
-    1. The user must navigate to their "Account Details" (click "Account Details" option).
-    2. Select the "Change Password" option.
-    3. User is presented an input box where they will enter their old password.
-    4. If the old password matches, the page will direct the user to an input box where they will enter their new password.
-    5. User selects the "Enter" button to confirm.
+   1. The user must navigate to their "Account Details" (click "Account Details" option).
+   2. Select the "Change Password" option.
+   3. User is presented an input box where they will enter their old password.
+   4. If the old password matches, the page will direct the user to an input box where they will enter their new password.
+   5. User selects the "Enter" button to confirm.
     
    Primary Postconditions: The user will be redirected back to the home page where they will be greeted with a confirmation flash message confirming that their password was successfully updated.
 
