@@ -119,6 +119,7 @@ def login():
                 session['logged_in'] = True
                 return redirect(url_for('home'))
             else:
+                session['logged_in'] = False
                 return '''
             <html>
             <head> Incorrect Log In </head>
@@ -128,6 +129,7 @@ def login():
             </html
             '''
         except:
+            session['logged_in'] = False
             return "Not Logged In"
 
 @app.route('/register/', methods=['GET', 'POST'])
@@ -208,36 +210,52 @@ def itemPage(id):
     iName = Item.query.get(id).name
     iPrice = Item.query.get(id).price
 
-    print(itemId)
+    ReducedPrice = iPrice * .1
 
+    if not session.get('logged_in'):
+        return render_template('itemInfo.html', itemName = iName, itemPrice = format(iPrice, '.2f'), IdNum = id, review_list = reviews_list, ReducedPrice = format(ReducedPrice, '.2f'), list = itemsList)
 
-    return render_template('itemInfo.html', itemName = iName, itemPrice = format(iPrice, '.2f'), IdNum = id, reviews_list = reviews_list)
+    else:
+        tempUser = session['username']
+
+        if request.method == 'POST':
+            new_review = reviews_table_test(
+                username = tempUser,
+                itemID = id,
+                review = request.form['review'])
+            reviews_list.append(new_review)   
+            db.session.add(new_review)
+            db.session.commit()
+            
+            return render_template('itemInfo.html', itemName = iName, itemPrice = format(iPrice, '.2f'), IdNum = id, review_list = reviews_list, ReducedPrice = format(ReducedPrice, '.2f'), list = itemsList)
+
+    return render_template('itemInfo.html', itemName = iName, itemPrice = format(iPrice, '.2f'), IdNum = id, reviews_list = reviews_list, ReducedPrice = format(ReducedPrice, '.2f'), list = itemsList)
 #@app.route("/itemInfo")
 #def itemInfo :
     #return render_template('intemInfo.html', item)
     
-@app.route('/iI/<int:id>/addreview', methods=['GET', 'POST'])
-def addreview(id):
-    itemId = Item.query.get(id)
-    iName = Item.query.get(id).name
-    itemIds = Item.query.get(id)
+@app.route('/addreview', methods=['GET', 'POST'])
+def addreview():
+ 
     # if session['logged_in'] == True:
-    tempUser = session['username']
+    
     # new_review = reviews_table_test
+    if not session.get('logged_in'):
+        return render_template('addreview.html', IdNum = id, review_list = reviews_list, list = itemsList)
 
-    if request.method == 'POST':
-        new_review = reviews_table_test(
-            username = tempUser,
-            itemID = id,
-            review = request.form['review'])
-        reviews_list.append(new_review)   
-        db.session.add(new_review)
-        db.session.commit()
+    else:    
+        tempUser = session['username']
+        if request.method == 'POST':
+            new_review = reviews_table_test(
+                username = tempUser,
+                review = request.form['review'])
+            reviews_list.append(new_review)   
+            db.session.add(new_review)
+            db.session.commit()
+        
 
 
-        return render_template('addreview.html', IdNum = id, review_list = reviews_list, list = itemsList, itemName = iName)
-
-    return render_template('addreview.html', IdNum = id, review_list = reviews_list, list = itemsList, itemName = iName)
+        return render_template('addreview.html', IdNum = id, review_list = reviews_list, list = itemsList)
 
 
 @app.route('/iI/<int:id>/coupon', methods=['GET', 'POST'])
