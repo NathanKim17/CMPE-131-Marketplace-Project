@@ -38,23 +38,42 @@
             
         {% endif %}
     
- 
-    <ul></ul>
-    <a href="/iI/{{IdNum}}/addreview">
-        <!--<input type="submit" value="Enter Coupon Code">-->
-        <button>Add a Review!</button>
-    </a>
+    
+        <form action="/iI/{{IdNum}}" method="POST">
+            <ul></ul>
+            <textarea type="review"  name="review"  placeholder="Type a review"></textarea>
+            <a href="/iI/{{IdNum}}">
+                <input type="submit" value="Add">
+            </a>
+            
+        </form>
+
 
     {% else %}
         
-        <ul style="text-align:center;">Login required for coupon and reviews.</ul>
+        <ul style="text-align:center;">Login required.</ul>
         <a href="/login">
             <button>Login!</button>
         </a>
     
     {% endif %}
     
+    <h2>Reviews:</h2>
+    <a href="/addreview">
+        <!--<input type="submit" value="Enter Coupon Code">-->
+        <button> View all reviews</button>
+    </a>
 
+    {% if review_list %}
+
+        {% for review in review_list %}
+            <!---{% if review.itemID == IdNum %} --->       
+                <li>{{review.username}} wrote {{review.review}}</li>
+            <!---{% endif %}--->
+            
+        {% endfor %}
+    
+    {% endif %}
 
 </body>
 
