@@ -218,6 +218,8 @@ def itemPage(id):
     
 @app.route('/iI/<int:id>/addreview', methods=['GET', 'POST'])
 def addreview(id):
+    itemId = Item.query.get(id)
+    iName = Item.query.get(id).name
     itemIds = Item.query.get(id)
     # if session['logged_in'] == True:
     tempUser = session['username']
@@ -233,9 +235,9 @@ def addreview(id):
         db.session.commit()
 
 
-        return render_template('addreview.html', IdNum = id, review_list = reviews_list, list = itemsList)
+        return render_template('addreview.html', IdNum = id, review_list = reviews_list, list = itemsList, itemName = iName)
 
-    return render_template('addreview.html', IdNum = id, review_list = reviews_list, list = itemsList)
+    return render_template('addreview.html', IdNum = id, review_list = reviews_list, list = itemsList, itemName = iName)
 
 
 @app.route('/iI/<int:id>/coupon', methods=['GET', 'POST'])
