@@ -1,19 +1,42 @@
 {% extends "base.html" %}
 {% block content %}
 <head>
-    <h1 style="text-align:center;">Add Review</h1>
+    <a href="/iI/{{IdNum}}">
+        <button> Go back</button>
+    </a>
+    <h1 style="text-align:center;">Item Information: {{itemName}}</h1>
 </head>
 
+
 <body>
-    <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Add Review</span>
-        </div>
-        <textarea class="form-control" aria-label="Add Review"></textarea>
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2">Add</button>
-        </div>
-    </div>
+    <h2 style="text-align:center;">Add Review</h1>
+    {% if session['logged_in'] %}
+        <form action="/iI/{{IdNum}}/addreview" method="POST">
+            <ul></ul>
+            <textarea type="review"  name="review"  placeholder="Type a review"></textarea>
+            <a href="/iI/{{IdNum}}/addreview">
+                <input type="submit" value="Add">
+            </a>
+            
+        </form>
+
+
+    {% else %}
+        <a href="/login">
+            <button>Login!</button>
+        </a>
+        <ul style="text-align:center;">Login required.</ul>
+    
+    {% endif %}
+
+    <h3 style="text-align:center;">Reviews</h1>
+    {% for review in review_list %}
+                    
+    <li>{{review.username}} wrote {{review.review}}</li>
+
+    {% endfor %}
+
+
 
 </body>
 {% endblock %}
