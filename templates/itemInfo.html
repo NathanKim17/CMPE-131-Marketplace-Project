@@ -44,7 +44,7 @@
 
     {% else %}
         
-        <ul style="text-align:center;">Login required.</ul>
+        <ul style="text-align:center;">Login required for coupon and reviews.</ul>
         <a href="/login">
             <button>Login!</button>
         </a>
@@ -53,12 +53,7 @@
     
     <h2>Reviews:</h2>
 
-    {% for review in review_list %}
-        <!---{% if review.itemID == IdNum %} --->       
-            <li>{{review.username}} wrote {{review.review}}</li>
-        <!---{% endif %}--->
-
-    {% endfor %}
+    
  
 </body>
 
