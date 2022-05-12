@@ -210,29 +210,8 @@ def itemPage(id):
 
     print(itemId)
 
-    couponcode = "Rojas"
 
-    tempUser = session['username']
-    
-    print(itemId)
-    usercoupon = "Test"
-    coupons = False
-    couponcode = "Rojas"
-    
-    if request.method == 'POST':
-        new_review = reviews_table_test(
-            username = tempUser,
-            itemID = id,
-            review = request.form['review'])
-        reviews_list.append(new_review)   
-        db.session.add(new_review)
-        db.session.commit()
-    
-        return render_template('itemInfo.html', itemName = iName, itemPrice = format(iPrice, '.2f'), IdNum = id, review_list = reviews_list, coupon = coupons, ReducedPrice = format(ReducedPrice, '.2f'))
-
-
-
-    return render_template('itemInfo.html', itemName = iName, itemPrice = format(iPrice, '.2f'), IdNum = id, reviews_list = reviews_list, coupon = coupons, ReducedPrice = format(ReducedPrice, '.2f'))
+    return render_template('itemInfo.html', itemName = iName, itemPrice = format(iPrice, '.2f'), IdNum = id, reviews_list = reviews_list)
 #@app.route("/itemInfo")
 #def itemInfo :
     #return render_template('intemInfo.html', item)
