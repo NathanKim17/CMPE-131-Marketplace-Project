@@ -2,6 +2,9 @@
 {% block content %}
 
 <head>
+    <a href="/browse">
+        <button> Go back</button>
+    </a>
     <h1 style="text-align:center;">Item Information: {{itemName}}</h1>
 </head>
 
@@ -17,6 +20,7 @@
             <li>Price: ${{itemPrice}}</li>
         </ul>
     {% endif %}
+
 
     {% if session['logged_in'] %}
         {% if coupon == True %}
@@ -34,32 +38,24 @@
             
         {% endif %}
     
-        <form action="/iI/{{IdNum}}" method="POST">
-            <ul></ul>
-            <textarea type="review"  name="review"  placeholder="Type a review"></textarea>
-            <a href="/iI/{{IdNum}}">
-                <input type="submit" value="Add">
-            </a>
-        </form>
+ 
+    <ul></ul>
+    <a href="/iI/{{IdNum}}/addreview">
+        <!--<input type="submit" value="Enter Coupon Code">-->
+        <button>Add a Review!</button>
+    </a>
 
     {% else %}
         
-        <ul style="text-align:center;">Login required.</ul>
+        <ul style="text-align:center;">Login required for coupon and reviews.</ul>
         <a href="/login">
             <button>Login!</button>
         </a>
     
     {% endif %}
     
-    <h2>Reviews:</h2>
 
-    {% for review in review_list %}
-        <!---{% if review.itemID == IdNum %} --->       
-            <li>{{review.username}} wrote {{review.review}}</li>
-        <!---{% endif %}--->
 
-    {% endfor %}
- 
 </body>
 
 {% endblock %}
