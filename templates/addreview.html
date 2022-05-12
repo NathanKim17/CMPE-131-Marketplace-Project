@@ -1,20 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
 <head>
-    <a href="/iI/{{IdNum}}">
-        <button> Go back</button>
+    <a href="/">
+        <button>Go home</button>
     </a>
-    <h1 style="text-align:center;">Item Information: {{itemName}}</h1>
+    <h1 style="text-align:center;">All Reviews</h1>
 </head>
 
 
 <body>
-    <h2 style="text-align:center;">Add Review</h1>
+    <h2 style="text-align:center;">Add a Review</h1>
     {% if session['logged_in'] %}
-        <form action="/iI/{{IdNum}}/addreview" method="POST">
+        <form action="/addreview" method="POST">
             <ul></ul>
             <textarea type="review"  name="review"  placeholder="Type a review"></textarea>
-            <a href="/iI/{{IdNum}}/addreview">
+            <a href="/addreview">
                 <input type="submit" value="Add">
             </a>
             
@@ -29,7 +29,7 @@
     
     {% endif %}
 
-    <h3 style="text-align:center;">Reviews</h1>
+ 
     {% for review in review_list %}
                     
     <li>{{review.username}} wrote {{review.review}}</li>
