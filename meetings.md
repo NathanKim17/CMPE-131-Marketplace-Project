@@ -35,3 +35,13 @@
   - <Nathan Kim> Continue to work on the funcitonal requirements of browsing item, adding items to shopping cart, and removing items
   - <Anh Vuong> Continue to work on the functional requirement for changing password for the user and finished updating the user's payment into a database
   - <Bao Pham> Helped Nathan with his functional requirement for browsing items. 
+ 
+ ### 2022-05-11 at 18:00
+- Nathan Kim, Anh Vuong, Bao Pham, Adam Eccleston
+- Virutal Meeting (Discord)
+- Team udpates 
+  - <Nathan Kim> finished the functional requirement.
+  - <Anh Vuong> finished the functional requirement.
+  - <Bao Pham> finished the functional requirement.
+  - <Adam Eccleston> finished the functional requirement.
+
