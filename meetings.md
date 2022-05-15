@@ -44,4 +44,13 @@
   - <Anh Vuong> finished the functional requirement.
   - <Bao Pham> finished the functional requirement.
   - <Adam Eccleston> finished the functional requirement.
+ 
+ ### 2022-05-15 at 14:00
+- Nathan Kim, Anh Vuong, Bao Pham, Adam Eccleston
+- Virutal Meeting (Discord)
+- Team udpates 
+  - <Nathan Kim> added another feature wishlist.
+  - <Anh Vuong> worked on bootstrap and adding more pictures.
+  - <Bao Pham> worked on virtualenv.
+  - <Adam Eccleston> helped Anh and Bao with boostrap and virtualenv.
 
