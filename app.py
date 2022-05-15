@@ -15,6 +15,7 @@ class User(db.Model):
         self.username = username
         self.password = password
         
+#this is the database for changing password
 class User_new(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     password = db.Column(db.String(80), unique=True)
@@ -53,6 +54,7 @@ class update_payment(db.Model):
     #def __repr__(self):
         #return f'<Item: {self.name}'
 
+#this is the database for browsing items
 class Item(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
@@ -62,6 +64,7 @@ class Item(db.Model):
         self.name = name
         self.price = price
 
+#this is the database for user reviews
 class reviews_table_test(db.Model):
     review_number = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(80), db.ForeignKey('user.username'))
@@ -71,9 +74,6 @@ class reviews_table_test(db.Model):
     def init(self, username, review):
         self.username = username
         self.review = review
-        
-
-        
         
 # newItem = Item2(name = 'Coke', price = 1.50)
 # db.session.add(newItem)
@@ -253,10 +253,7 @@ def addreview():
             db.session.add(new_review)
             db.session.commit()
         
-
-
         return render_template('addreview.html', IdNum = id, review_list = reviews_list, list = itemsList)
-
 
 @app.route('/iI/<int:id>/coupon', methods=['GET', 'POST'])
 def addcoupon(id):
@@ -278,7 +275,6 @@ def addcoupon(id):
         
         print(usercoupon)
     return render_template('coupon.html', itemName = iName, itemPrice = format(iPrice, '.2f'), IdNum = id, review_list = reviews_list, coupon = coupons, ReducedPrice = format(ReducedPrice, '.2f'))
-    
     
 if __name__ == '__main__':
     app.debug = True
