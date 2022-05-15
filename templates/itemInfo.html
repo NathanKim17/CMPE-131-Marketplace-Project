@@ -2,14 +2,79 @@
 {% block content %}
 
 <head>
+    <a href="/browse">
+        <button> Go back</button>
+    </a>
     <h1 style="text-align:center;">Item Information: {{itemName}}</h1>
 </head>
 
 <body>
     <h2>Details:</h2>
-    <ul>
-        <li>Price: {{itemPrice}}</li>
-    </ul>
+    {% if coupon == True %}
+        <ul>
+            <li>Price: <s>${{itemPrice}}</s> ${{ReducedPrice}}</li>
+        </ul>
+
+    {% else %}
+        <ul>
+            <li>Price: ${{itemPrice}}</li>
+        </ul>
+    {% endif %}
+
+
+    {% if session['logged_in'] %}
+        {% if coupon == True %}
+            <ul>
+                <li>Coupon Entered!</li>
+            </ul>
+
+        {% else %}
+            
+                <!--<input type="coupon" name="coupon" placeholder="Coupon Code">-->
+                <a href="/iI/{{IdNum}}/coupon">
+                    <!--<input type="submit" value="Enter Coupon Code">-->
+                    <button> Enter Coupon Code</button>
+                </a>
+            
+        {% endif %}
+    
+    
+        <form action="/iI/{{IdNum}}" method="POST">
+            <ul></ul>
+            <textarea type="review"  name="review"  placeholder="Type a review"></textarea>
+            <a href="/iI/{{IdNum}}">
+                <input type="submit" value="Add">
+            </a>
+            
+        </form>
+
+
+    {% else %}
+        
+        <ul style="text-align:center;">Login required for coupon and adding reviews.</ul>
+        <a href="/login">
+            <button>Login!</button>
+        </a>
+    
+    {% endif %}
+    
+    <h2>Reviews:</h2>
+    <a href="/addreview">
+        <!--<input type="submit" value="Enter Coupon Code">-->
+        <button> View all reviews</button>
+    </a>
+
+    {% if review_list %}
+
+        {% for review in review_list %}
+            <!---{% if review.itemID == IdNum %} --->       
+                <li>{{review.username}} wrote {{review.review}}</li>
+            <!---{% endif %}--->
+            
+        {% endfor %}
+    
+    {% endif %}
+
 </body>
 
 {% endblock %}

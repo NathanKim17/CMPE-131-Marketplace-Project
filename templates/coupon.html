@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+
+<head>
+    <h1 style="text-align:center;">Item Information: {{itemName}}</h1>
+</head>
+
+<body>
+    <h2>Details:</h2>
+    {% if coupon == True %}
+        <ul>
+            <li>Price: <s>${{itemPrice}}</s> ${{ReducedPrice}}</li>
+        </ul>
+
+    {% else %}
+        <ul>
+            <li>Price: ${{itemPrice}}</li>
+        </ul>
+    {% endif %}
+
+    {% if coupon == True %}
+        <ul>
+            <li>Coupon Entered!</li>
+        </ul>
+
+    {% else %}
+        
+        <form action="/iI/{{IdNum}}/coupon" method="POST">
+            <input type="coupon" name="coupon" placeholder="Coupon Code">
+            <a href="/iI/{{IdNum}}/coupon">
+                <input type="submit" value="Add">
+            </a>
+        </form>
+        
+    {% endif %}
+    <ul></ul>
+    <a href="/iI/{{IdNum}}">
+        <button> Go back</button>
+    </a>
+
+</body>
+
+{% endblock %}
