@@ -63,10 +63,27 @@ class Item2(db.Model):
         self.price = price
 
 
-newItem = Item2(name = 'Coke', price = 1.50)
-db.session.add(newItem)
+# newItem = Item2(name = 'Coke', price = 1.50)
+# db.session.add(newItem)
+# db.session.commit()
+
+
+itemsList = []
+itemsList.append(Item2(name = 'Coke', price = 1.50))
+db.session.add(itemsList[0])
 db.session.commit()
 
+itemsList.append(Item2(name = 'Yoyo', price = 1.75))
+db.session.add(itemsList[1])
+db.session.commit()
+
+itemsList.append(Item2(name = "Jar", price = 0.50))
+db.session.add(itemsList[2])
+db.session.commit()
+
+itemsList.append(Item2(name = "Soccer Ball", price = 50.00))
+db.session.add(itemsList[3])
+db.session.commit()
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -149,13 +166,30 @@ def updatepayment():
 @app.route("/browse")
 def browse() :
     #itemOne = Item("Cool Aid", "011223", 1.23)
-    itemsList = []
-    #itemsList.append(Item("Cool Aid", "011223", 1.23))
-    # itemsList.append(Item("Coke", "32145", 10.99))
-    # itemsList.append(Item("Ice Cream", "8787", 0.50))
-    # itemsList.append(Item("Soccer Ball", "7777", 50.00))
+    # itemsList = []
+    # itemsList.append(Item2(name = 'Coke', price = 1.50))
+    # itemsList.append(Item2(name = 'Yoyo', price = 1.75))
+    # itemsList.append(Item2(name = "Jar", price = 0.50))
+    # itemsList.append(Item2(name = "Soccer Ball", price = 50.00))
+
+    #itemId = Item2.query.get(1)
+    #iName = Item2.query.get(itemId).name
+    #iPrice = Item2.query.get(itemId).price
+    #iName = "Nathan"
+    #iPrice = "Bao"
+    #nI = Item2(name = itemName, price = itemPrice)
+    # itemsList.append(nI)
     return render_template('browse.html', list = itemsList)
 
+@app.route('/iI/<int:id>', methods=['GET', 'POST'])
+def itemPage(id):
+    itemId = Item2.query.get(id)
+    iName = Item2.query.get(id).name
+    iPrice = Item2.query.get(id).price
+
+    print(itemId)
+
+    return render_template('itemInfo.html', itemName = iName, itemPrice = iPrice)
 #@app.route("/itemInfo")
 #def itemInfo :
     #return render_template('intemInfo.html', item)
