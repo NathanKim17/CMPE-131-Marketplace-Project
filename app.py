@@ -74,7 +74,16 @@ class reviews_table_test(db.Model):
     def init(self, username, review):
         self.username = username
         self.review = review
-        
+
+#this is the wishlist database
+class wishlist(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
+    price = db.Column(db.Float(80))
+
+    def init(self, name, price):
+        self.name = name
+        self.price = price
 # newItem = Item2(name = 'Coke', price = 1.50)
 # db.session.add(newItem)
 # db.session.commit()
@@ -98,6 +107,7 @@ db.session.add(itemsList[3])
 db.session.commit()
 
 reviews_list = []
+wish_list = []
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -261,7 +271,7 @@ def addcoupon(id):
     itemId = Item.query.get(id)
     iName = Item.query.get(id).name
     iPrice = Item.query.get(id).price
-    # uName = User.query.get(username)
+    #uName = User.query.get(username)
     ReducedPrice = iPrice * .1
 
     usercoupon = "Test"
@@ -275,9 +285,40 @@ def addcoupon(id):
         
         print(usercoupon)
     return render_template('coupon.html', itemName = iName, itemPrice = format(iPrice, '.2f'), IdNum = id, review_list = reviews_list, coupon = coupons, ReducedPrice = format(ReducedPrice, '.2f'))
-    
+
+@app.route('/addWishlist/<int:IdNum>')
+def addWishlist(IdNum):
+    itemId = Item.query.get(IdNum)
+    iName = Item.query.get(IdNum).name
+    iPrice = Item.query.get(IdNum).price
+    wishlistEntry = wishlist(name = iName, price = iPrice)
+
+    wish_list.append(wishlistEntry)
+
+    db.session.add(wishlistEntry)
+    db.session.commit()
+
+    return render_template('successWishlist.html', add = 1, wishList = wish_list)
+
+@app.route('/removeItem/<int:id>')
+def removeItem(id):  
+    #Deleting from the database
+    deleteItem = wishlist.query.filter_by(id= id).first()
+    db.session.delete(deleteItem)
+    db.session.commit()
+
+    #Deleting the item from the array in app.py
+    for item in wish_list:
+        if item.id == id:
+            wish_list.remove(item)
+    return render_template('successWishlist.html', delete = 1, wishList = wish_list)
+
+@app.route('/viewWishList')
+def viewWishList():
+    return render_template('successWishlist.html', wishList = wish_list)
 if __name__ == '__main__':
     app.debug = True
     db.create_all()
     app.secret_key = "123"
     app.run(host='0.0.0.0')
+
