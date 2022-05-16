@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+
+<head>
+
+
+</head>
+
+<body>
+        <h1>Wish List</h1>
+
+        {% if add %}
+         <h2>Your item was successfully added to your wishlist</h2>
+        {% endif %}
+
+        {% if delete %}
+         <h2>Your item was successfully deleted from your wishlist</h2>
+        {% endif %}
+
+        {% for item in wishList %}      
+                <li>{{item.name}} : {{item.price}}      <a href="/removeItem/{{item.id}}">Remove Item</a></li>
+        {% endfor %}
+
+
+</body>
+{% endblock %}
