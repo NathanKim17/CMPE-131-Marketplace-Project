@@ -237,9 +237,8 @@ def itemPage(id):
             db.session.add(new_review)
             db.session.commit()
             
-            return render_template('itemInfo.html', itemName = iName, itemPrice = format(iPrice, '.2f'), IdNum = id, review_list = reviews_list, ReducedPrice = format(ReducedPrice, '.2f'), list = itemsList)
+        return render_template('itemInfo.html', itemName = iName, itemPrice = format(iPrice, '.2f'), IdNum = id, review_list = reviews_list, ReducedPrice = format(ReducedPrice, '.2f'), list = itemsList)
 
-    return render_template('itemInfo.html', itemName = iName, itemPrice = format(iPrice, '.2f'), IdNum = id, reviews_list = reviews_list, ReducedPrice = format(ReducedPrice, '.2f'), list = itemsList)
 #@app.route("/itemInfo")
 #def itemInfo :
     #return render_template('intemInfo.html', item)
