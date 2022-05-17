@@ -27,7 +27,7 @@
         {% endif %}
 
         {% for item in wishList %}      
-                <li>{{item.name}} : {{item.price}}      <a href="/removeItem/{{item.id}}">Remove Item</a></li>
+                <li>{{item.name}} : ${{'%0.2f'| format(item.price|float)}}      <a href="/removeItem/{{item.id}}">Remove Item</a></li>
         {% endfor %}
 
 </head>
