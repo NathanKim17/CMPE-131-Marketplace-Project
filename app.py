@@ -1,9 +1,21 @@
+import sqlite3
 from flask import Flask, flash, url_for, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
+
+#These are for reading from the databases
+connection = sqlite3.connect("test.db")
+crsruser = connection.cursor()
+crsrid = connection.cursor()
+crsrreview = connection.cursor()
+
+
+crsrid = connection.cursor()
+crsrname = connection.cursor()
+crsrprice = connection.cursor()
 
 #User Class
 class User(db.Model):
@@ -75,6 +87,29 @@ class reviews_table_test(db.Model):
         self.username = username
         self.review = review
 
+#This is for reading the reviews from the database
+reviews_list = []
+crsruser.execute("SELECT username FROM reviews_table_test")
+crsrid.execute("SELECT itemID FROM reviews_table_test")
+crsrreview.execute("SELECT review FROM reviews_table_test")
+rowuser = crsruser.fetchone()
+rowid = crsrid.fetchone()
+rowreview = crsrreview.fetchone()
+while rowreview is not None:
+    rowuser = " ".join(str(x) for x in rowuser)
+    rowid = " ".join(str(x) for x in rowid)
+    rowreview = " ".join(str(x) for x in rowreview)
+    print(rowuser, rowid, rowreview)
+    new_review = reviews_table_test(
+        username = rowuser,
+        itemID = rowid,
+        review = rowreview)
+    reviews_list.append(new_review)   
+    rowuser = crsruser.fetchone()
+    rowid = crsrid.fetchone()
+    rowreview = crsrreview.fetchone()
+        
+        
 #this is the wishlist database
 class wishlist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -90,23 +125,43 @@ class wishlist(db.Model):
 
 
 itemsList = []
-itemsList.append(Item(name = 'Coke', price = 1.50))
-db.session.add(itemsList[0])
-db.session.commit()
+# itemsList.append(Item(name = 'Coke', price = 1.50))
+# db.session.add(itemsList[0])
+# db.session.commit()
 
-itemsList.append(Item(name = 'Yoyo', price = 1.75))
-db.session.add(itemsList[1])
-db.session.commit()
+# itemsList.append(Item(name = 'Yoyo', price = 1.75))
+# db.session.add(itemsList[1])
+# db.session.commit()
 
-itemsList.append(Item(name = "Jar", price = 0.50))
-db.session.add(itemsList[2])
-db.session.commit()
+# itemsList.append(Item(name = "Jar", price = 0.50))
+# db.session.add(itemsList[2])
+# db.session.commit()
 
-itemsList.append(Item(name = "Soccer Ball", price = 50.00))
-db.session.add(itemsList[3])
-db.session.commit()
+# itemsList.append(Item(name = "Soccer Ball", price = 50.00))
+# db.session.add(itemsList[3])
+# db.session.commit()
 
-reviews_list = []
+#This is for reading the items from the database
+crsrid.execute("SELECT id FROM item")
+crsrname.execute("SELECT name FROM item")
+crsrprice.execute("SELECT price FROM item")
+rowid = crsrid.fetchone()
+rowname = crsrname.fetchone()
+rowprice = crsrprice.fetchone()
+while rowprice is not None:
+    rowid = " ".join(str(x) for x in rowid)
+    rowname = " ".join(str(x) for x in rowname)
+    rowprice = " ".join(str(x) for x in rowprice)
+    print(rowid, rowname, rowprice)
+    new_item = Item(
+        id = rowid,
+        name = rowname,
+        price = rowprice)
+    itemsList.append(new_item)   
+    rowid = crsrid.fetchone()
+    rowname = crsrname.fetchone()
+    rowprice = crsrprice.fetchone()
+
 wish_list = []
 
 @app.route('/', methods=['GET', 'POST'])
