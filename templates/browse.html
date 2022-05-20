@@ -1,10 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
+
 <head>
     <h1 style="text-align:center;">Browse</h1>
 </head>
-
+<form method="POST" action="{{ url_for('search')}}" class="d-flex">
+    {{ form.hidden_tag() }}
+    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searched">
+    <button class="btn btn-outline-secondary" type="submit">Search</button>
 <body>
+
+    {%for post in posts %}
+    <h2> you searched for...</h2>
+        <a href="{{ url_for('post', id = post.id)}}"> {{ post.name }}</a> </br>
+    {% endfor %}
+
     {% if list %}
         <ol>
             {% for item in list %}
