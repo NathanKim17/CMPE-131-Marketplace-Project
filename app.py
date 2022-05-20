@@ -211,7 +211,9 @@ def register():
 @app.route('/delete', methods=['GET', 'POST'])
 def delete():
     session['logged_in'] = True
-    User.query.filter_by(id=1).delete()
+    tempuser = session['username']
+    temppuser = User.query.filter_by(username = tempuser).first()
+    db.session.delete(temppuser)
     db.session.commit()
     session['logged_in'] = False
     return render_template('index.html')
@@ -224,6 +226,27 @@ def logout():
 @app.route("/accountdetails", methods=['GET', 'POST'])
 def accountdetails():
      return render_template('accountdetails.html')
+
+@app.route("/changepassword", methods=['GET', 'POST'])
+def changepassword():
+    tempuser = session['username']
+    temppuser = User.query.filter_by(username = tempuser).first()
+    tempid = temppuser.id
+    temppass = temppuser.password
+    print(tempuser)
+    print(tempid)
+    if request.method == 'POST':
+        password=request.form['password']
+        temppuser.password =request.form['newpassword']
+        if password == temppass:
+            db.session.commit()
+            flash('Your password has been updated!')
+            return render_template('index.html')
+        else:
+            flash('You entered an incorrect password')
+            return render_template('changepassword.html')
+    return render_template('changepassword.html')
+
 
 @app.route("/updatepayment", methods=['GET', 'POST'])
 def updatepayment():
