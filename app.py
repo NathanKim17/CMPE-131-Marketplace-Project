@@ -1,6 +1,12 @@
+from pdb import post_mortem
 import sqlite3
+from wsgiref.validate import validator
 from flask import Flask, flash, url_for, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
@@ -12,11 +18,15 @@ crsruser = connection.cursor()
 crsrid = connection.cursor()
 crsrreview = connection.cursor()
 
-
 crsrid = connection.cursor()
 crsrname = connection.cursor()
 crsrprice = connection.cursor()
 
+#This is a search form for searching items
+class SearchForm(FlaskForm):
+	searched = StringField("Searched", validators=[DataRequired()])
+	submit = SubmitField("Submit")
+    
 #User Class
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -26,16 +36,6 @@ class User(db.Model):
     def __init__(self, username, password):
         self.username = username
         self.password = password
-        
-#this is the database for changing password
-class User_new(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    password = db.Column(db.String(80), unique=True)
-    newpassword = db.Column(db.String(80))
-
-    def __init__(self, password, newpassword):
-        self.password = password
-        self.newpassword = newpassword
         
 #card update payment class
 class update_payment(db.Model):
@@ -224,18 +224,6 @@ def logout():
 @app.route("/accountdetails", methods=['GET', 'POST'])
 def accountdetails():
      return render_template('accountdetails.html')
- 
-@app.route("/changepassword", methods=['GET', 'POST'])
-def changepassword():
-    if request.method == 'POST':
-        new_password = User_new(
-            password=request.form['password'],
-            newpassword=request.form['newpassword'])
-        db.session.add(new_password)
-        db.session.commit()
-        flash('Your password has been updated!')
-        return render_template('index.html')
-    return render_template('changepassword.html')
 
 @app.route("/updatepayment", methods=['GET', 'POST'])
 def updatepayment():
@@ -370,6 +358,28 @@ def removeItem(id):
 @app.route('/viewWishList')
 def viewWishList():
     return render_template('successWishlist.html', wishList = wish_list)
+
+@app.context_processor
+def base():
+    form = SearchForm()
+    return dict(form = form)
+    
+@app.route('/iI/<int:id>')
+def post(id):
+	post = Item.query.get_or_404(id)
+	return render_template('itemInfo.html', post=post)
+
+@app.route('/browse', methods = ['GET', 'POST'])
+def search():
+    form = SearchForm()
+    posts = Item.query
+    if form.validate_on_submit:
+        post.searched = form.searched.data
+        posts = posts.filter(Item.name.like('%' + post.searched + '%'))
+        posts = posts.order_by(Item.name).all()
+        
+        return render_template("browse.html",form=form, searched=post.searched, posts = posts)
+        
 if __name__ == '__main__':
     app.debug = True
     db.create_all()
